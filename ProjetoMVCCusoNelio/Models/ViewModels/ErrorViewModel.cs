@@ -1,6 +1,6 @@
 using System;
 
-namespace ProjetoMVCCusoNelio.Models
+namespace ProjetoMVCCusoNelio.Models.ViewModels
 {
     public class ErrorViewModel
     {
