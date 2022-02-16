@@ -1,4 +1,5 @@
-﻿using ProjetoMVCCusoNelio.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using ProjetoMVCCusoNelio.Data;
 using ProjetoMVCCusoNelio.Models;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,7 +28,7 @@ namespace ProjetoMVCCusoNelio.Services
 
         public Seller FindById(int id)
         {
-            return _context.Seller.FirstOrDefault(obj => obj.Id == id);
+            return _context.Seller.Include(obj => obj.Department).FirstOrDefault(obj => obj.Id == id);
         }
 
         public void Remove (int id)
