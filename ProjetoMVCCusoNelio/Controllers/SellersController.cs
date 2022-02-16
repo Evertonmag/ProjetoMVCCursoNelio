@@ -37,6 +37,18 @@ namespace ProjetoMVCCusoNelio.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Create(Seller seller)
         {
+            if (!ModelState.IsValid)
+            {
+                var departments = _departmentService.FindAll();
+                var viewModel = new SellerFormViewModel
+                {
+                    Seller = seller,
+                    Departments = departments
+                };
+
+                return View(viewModel);
+            }
+
             _sellerService.Insert(seller);
             return RedirectToAction(nameof(Index));
         }
@@ -106,6 +118,18 @@ namespace ProjetoMVCCusoNelio.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Edit(int Id, Seller seller)
         {
+            if (!ModelState.IsValid)
+            {
+                var departments = _departmentService.FindAll();
+                var viewModel = new SellerFormViewModel
+                {
+                    Seller = seller,
+                    Departments = departments
+                };
+
+                return View(viewModel);
+            }
+
             if (Id != seller.Id)
                 return RedirectToAction(nameof(Error), new
                 {
