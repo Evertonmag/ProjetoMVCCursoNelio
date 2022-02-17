@@ -2,7 +2,7 @@
 using ProjetoMVCCusoNelio.Models;
 using ProjetoMVCCusoNelio.Models.ViewModels;
 using ProjetoMVCCusoNelio.Services;
-using ProjetoMVCCusoNelio.Views.Sellers.Exceptions;
+using ProjetoMVCCusoNelio.Services.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -74,8 +74,18 @@ namespace ProjetoMVCCusoNelio.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Delete(int id)
         {
-            await _sellerService.RemoveAsync(id);
-            return RedirectToAction(nameof(Index));
+            try
+            {
+                await _sellerService.RemoveAsync(id);
+                return RedirectToAction(nameof(Index));
+            }
+            catch (IntegrityException ex)
+            {
+                return RedirectToAction(nameof(Error), new
+                {
+                    message = ex.Message
+                });
+            }
         }
 
         public async Task<IActionResult> Details(int? id)

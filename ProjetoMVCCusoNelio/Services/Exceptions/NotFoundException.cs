@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ProjetoMVCCusoNelio.Views.Sellers.Exceptions
+namespace ProjetoMVCCusoNelio.Services.Exceptions
 {
     public class NotFoundException : ApplicationException
     {
